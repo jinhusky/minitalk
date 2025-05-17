@@ -6,20 +6,21 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 19:02:43 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/17 14:54:02 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/17 21:13:59 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
-#define LIBFT_H
+# define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
-#endif
+# endif
 # ifndef MAX_FD
 #  define MAX_FD 1024
-#endif
+# endif
 
 typedef struct s_list
 {
@@ -114,6 +115,9 @@ void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
 
-char	*get_next_line(int fd);
+char			*get_next_line(int fd);
 
+int				ft_putstr(const char *s);
+
+int				ft_putchar(const char c);
 #endif

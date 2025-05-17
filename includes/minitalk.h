@@ -6,8 +6,13 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 22:17:43 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/17 22:17:45 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/17 22:20:47 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MINITALK_H
+# define MINITALK_H
 
+# include "libft.h"
+
+#endif

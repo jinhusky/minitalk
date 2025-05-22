@@ -6,7 +6,7 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 19:02:43 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/23 01:18:04 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/23 01:22:00 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,6 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 char			*get_next_line(int fd);
 
-int				ft_putchar(const char c);
-
 int				ft_printf(const char *str, ...);
-
 
 #endif

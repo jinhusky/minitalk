@@ -6,13 +6,19 @@
 #    By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/17 21:27:29 by kationg           #+#    #+#              #
-#    Updated: 2025/05/20 13:11:46 by kationg          ###   ########.fr        #
+#    Updated: 2025/05/23 02:18:03 by kationg          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk
+NAME = $(CLIENT) $(SERVER)
 
-SRC = client.c, server.c
+CLIENT = ./client
+
+SERVER = ./server
+
+CLIENT_FILE = client.c
+
+SERVER_FILE = server.c
 
 INCLUDES = -Iincludes/ -Ilibft/
 
@@ -25,17 +31,21 @@ all : $(NAME)
 # -I includes path for the compiler to find header file
 # $^ represent all dependencies while $< only the first dependency
 
-$(NAME) : $(OBJ)
+$(CLIENT) : $(CLIENT_FILE)
+	make -C libft all
 	@cc $(CFLAGS) $(INCLUDES) $^ libft/libft.a -o $@
 
-%.o:%.c
-	@cc $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(SERVER) : $(SERVER_FILE)
+	make -C libft all
+	@cc $(CFLAGS) $(INCLUDES) $^ libft/libft.a -o $@
 
 clean : 
-	rm -f $(OBJ)
+	make -C libft clean
+	rm -f $(NAME)
 
 fclean : clean
-	rm -f $(NAME)
+	make -C libft fclean
+	rm -f $(CLIENT) $(SERVER)
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 22:17:43 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/19 16:11:12 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/23 02:15:17 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 # define MINITALK_H
 
 # include "../libft/libft.h"
+# include <signal.h>
 
 #endif

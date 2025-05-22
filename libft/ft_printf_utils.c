@@ -5,14 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 20:56:33 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/17 21:03:15 by kationg          ###   ########.fr       */
+/*   Created: 2025/01/14 00:25:58 by kationg           #+#    #+#             */
+/*   Updated: 2025/05/23 01:11:07 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_finddec(int n)
+static int	ft_finddec(int n)
 {
 	int	count;
 
@@ -49,7 +50,7 @@ int	ft_putdec(int n)
 	return (count);
 }
 
-int	find_unsigned(unsigned int n)
+static int	find_unsigned(unsigned int n)
 {
 	int	count;
 

@@ -5,59 +5,61 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 21:03:34 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/17 21:04:11 by kationg          ###   ########.fr       */
+/*   Created: 2025/01/14 00:23:13 by kationg           #+#    #+#             */
+/*   Updated: 2025/05/23 01:16:21 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_putdec(int n)
+static int	find_hex(unsigned long addr, int flag)
 {
-	int	count;
+	size_t	size;
 
-	count = 0;
-	if (n == -2147483648)
-		return (write(1, "-2147483648", 11));
-	else
+	size = 2;
+	if (flag == 1)
+		size = 0;
+	if (addr == 0)
+		return (1);
+	while (addr > 0)
 	{
-		if (n < 0)
-		{
-			count += ft_putchar('-');
-			n = -n;
-		}
-		else if (n == 0)
-			return (ft_putchar('0'));
-		count += ft_finddec(n);
-		if (n > 9)
-			ft_putdec(n / 10);
-		ft_putchar(n % 10 + '0');
+		addr /= 16;
+		size++;
 	}
-	return (count);
+	return (size);
 }
 
-int	find_unsigned(unsigned int n)
+static void	print_hex(unsigned long addr)
 {
-	int	count;
+	const char	*base_16 = "0123456789abcdef";
 
-	count = 0;
-	while (n > 0)
-	{
-		n /= 10;
-		count++;
-	}
-	return (count);
+	if (addr >= 16)
+		print_hex(addr / 16);
+	ft_putchar(base_16[addr % 16]);
 }
 
-int	ft_putunsigned(unsigned int n)
+int	ft_putptr(void *ptr)
 {
-	int	count;
+	if (!ptr)
+	{
+		write(1, "(nil)", 5);
+		return (5);
+	}
+	write(1, "0x", 2);
+	print_hex((unsigned long) ptr);
+	return (find_hex((unsigned long) ptr, 0));
+}
 
-	count = find_unsigned(n);
-	if (n == 0)
-		return (ft_putchar('0'));
-	if (n > 9)
-		ft_putunsigned(n / 10);
-	ft_putchar(n % 10 + '0');
-	return (count);
+int	ft_puthex(unsigned int n, int caseup)
+{
+	char	*base_16;
+
+	base_16 = "0123456789abcdef";
+	if (caseup == 1)
+		base_16 = "0123456789ABCDEF";
+	if (n >= 16)
+		ft_puthex(n / 16, caseup);
+	ft_putchar(base_16[n % 16]);
+	return (find_hex(n, 1));
 }

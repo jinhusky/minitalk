@@ -6,7 +6,7 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 19:02:43 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/17 21:13:59 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/23 01:18:04 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include <stddef.h>
+# include "ft_printf.h"
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
 # endif
@@ -117,7 +119,9 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 char			*get_next_line(int fd);
 
-int				ft_putstr(const char *s);
-
 int				ft_putchar(const char c);
+
+int				ft_printf(const char *str, ...);
+
+
 #endif

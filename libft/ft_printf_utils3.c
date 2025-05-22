@@ -1,16 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_printf_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 20:19:51 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/17 20:35:35 by kationg          ###   ########.fr       */
+/*   Created: 2025/01/14 00:19:12 by kationg           #+#    #+#             */
+/*   Updated: 2025/05/23 01:12:06 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "libft.h"
+
+int	ft_putchar(const char c)
+{
+	return (write(1, &c, 1));
+}
 
 int	ft_putstr(const char *s)
 {

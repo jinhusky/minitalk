@@ -6,7 +6,7 @@
 #    By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 14:36:11 by kationg           #+#    #+#              #
-#    Updated: 2025/05/17 21:14:12 by kationg          ###   ########.fr        #
+#    Updated: 2025/05/23 01:18:06 by kationg          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ SOURCES = \
 	ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c \
 	ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
 	ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
-	ft_putendl_fd.c ft_putnbr_fd.c get_next_line.c ft_putstr.c ft_printf.c \
-	ft_putchar.c
+	ft_putendl_fd.c ft_putnbr_fd.c get_next_line.c ft_printf.c \
+	ft_putchar.c  ft_printf_utils.c ft_printf_utils2.c ft_printf_utils3.c \
 
 BSOURCES = \
 	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \

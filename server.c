@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 22:17:43 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/19 16:11:12 by kationg          ###   ########.fr       */
+/*   Created: 2025/05/20 02:18:23 by kationg           #+#    #+#             */
+/*   Updated: 2025/05/23 00:08:32 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "includes/minitalk.h"
+#include "libft/libft.h"
 
-# include "../libft/libft.h"
+int main(void)
+{
+	ft_printf("%i", getpid());
 
-#endif
+}

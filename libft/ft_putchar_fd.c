@@ -6,7 +6,7 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 19:41:49 by kationg           #+#    #+#             */
-/*   Updated: 2024/11/13 20:32:03 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/20 10:37:27 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,4 @@
 void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
-}	
+}

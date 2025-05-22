@@ -6,7 +6,7 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 10:18:54 by kationg           #+#    #+#             */
-/*   Updated: 2024/11/20 16:40:03 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/20 10:36:35 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	if (!lst || !del)
 		return ;
 	while (*lst)
-	{	
+	{
 		tmp = (*lst)->next;
 		ft_lstdelone(*lst, del);
 		*lst = tmp;

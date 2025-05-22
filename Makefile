@@ -6,13 +6,13 @@
 #    By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/17 21:27:29 by kationg           #+#    #+#              #
-#    Updated: 2025/05/17 22:23:38 by kationg          ###   ########.fr        #
+#    Updated: 2025/05/20 13:11:46 by kationg          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minitalk
 
-SRC = 
+SRC = client.c, server.c
 
 INCLUDES = -Iincludes/ -Ilibft/
 
@@ -26,10 +26,10 @@ all : $(NAME)
 # $^ represent all dependencies while $< only the first dependency
 
 $(NAME) : $(OBJ)
-	@cc $(CFLAGS) $(INCLUDES) $^ -o $@
+	@cc $(CFLAGS) $(INCLUDES) $^ libft/libft.a -o $@
 
 %.o:%.c
-	@cc $(CFLAGS) $(INCLUDES) $^ -c $< -o $@
+	@cc $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean : 
 	rm -f $(OBJ)

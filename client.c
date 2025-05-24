@@ -6,12 +6,12 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:48:00 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/25 00:39:05 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/25 01:22:11 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minitalk.h"
-#include <signal.h>
+
 void signal_ack(int signum, siginfo_t *info, void *res)
 {
 	(void)res;
@@ -27,15 +27,16 @@ void send_char(int PID, char c)
 	i = 0;
 	while (i < 8)
 	{
-		temp = c << i;
-		if (temp & 1)
+		temp = c >> i;
+		if (temp & 0x01)
 			kill(PID, SIGUSR1);
 		else 
 			kill(PID, SIGUSR2);
 		i++;
+		usleep(1000);
 	}
 }
-
+	
 void send_mssg(int PID, char *mssg)
 {
 	while (*mssg)
@@ -57,7 +58,7 @@ int main(int argc, char *argv[])
 	}
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = SA_SIGINFO;
-	act.sa_sigaction = &signal_ack;
+	//act.sa_sigaction = &signal_ack;
 	sigaction(SIGUSR1, &act, NULL);
 	int PID = ft_atoi(argv[1]);
 	char *mssg = ft_strdup(argv[2]);

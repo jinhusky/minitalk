@@ -5,48 +5,62 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 22:41:52 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/23 12:00:18 by kationg          ###   ########.fr       */
+/*   Created: 2025/05/24 22:48:00 by kationg           #+#    #+#             */
+/*   Updated: 2025/05/25 00:39:05 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minitalk.h"
-#include "libft/libft.h"
-
-int signal_char(char c, int PID)
+#include <signal.h>
+void signal_ack(int signum, siginfo_t *info, void *res)
 {
+	(void)res;
+	if (signum == SIGUSR1)
+		ft_printf("Message was received and acknowledged by %i", info->si_pid);
+}
+
+void send_char(int PID, char c)
+{
+	char	temp;
 	int	i;
-	int bits = 0;
+
 	i = 0;
-	while (bits < 8)
+	while (i < 8)
 	{
-		char temp = c >> i;
-		if (temp % 2 == 0)
+		temp = c << i;
+		if (temp & 1)
 			kill(PID, SIGUSR1);
 		else 
 			kill(PID, SIGUSR2);
 		i++;
-		bits++;
 	}
-	return (0);
 }
 
-int	main(int argc, char *argv[])
+void send_mssg(int PID, char *mssg)
 {
+	while (*mssg)
+	{
+		send_char(PID, *mssg);
+		mssg++;
+	}
+	send_char(PID, '\0');
+}
+
+int main(int argc, char *argv[])
+{
+	struct sigaction act;
 
 	if (argc != 3)
 	{
-		ft_printf("Usage: ./minitalk (PID) message");
+		ft_printf("Error! Usage:./client [PID] [message]");
 		exit(1);
 	}
+	sigemptyset(&act.sa_mask);
+	act.sa_flags = SA_SIGINFO;
+	act.sa_sigaction = &signal_ack;
+	sigaction(SIGUSR1, &act, NULL);
 	int PID = ft_atoi(argv[1]);
-	char *mssg = argv[2];
-
-	while (*mssg)
-	{
-		signal_char(*mssg, PID);
-		usleep(100);
-		mssg++;
-	}
-
+	char *mssg = ft_strdup(argv[2]);
+	send_mssg(PID, mssg);
+	free(mssg);
 }

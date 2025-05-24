@@ -6,7 +6,7 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:48:00 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/25 01:22:11 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/25 01:44:05 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void send_char(int PID, char c)
 		else 
 			kill(PID, SIGUSR2);
 		i++;
-		usleep(1000);
+		usleep(50000);
 	}
 }
 	

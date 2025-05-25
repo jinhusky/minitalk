@@ -6,7 +6,7 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 12:16:31 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/25 02:00:43 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/25 15:13:22 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void signal_handler(int signum, siginfo_t *info, void *res)
 {
-	static unsigned char character;
+	static int character;
 	static int bits;
 	
 	(void)res;
@@ -24,7 +24,7 @@ void signal_handler(int signum, siginfo_t *info, void *res)
 		character |= (0x01 << bits);
 	bits++;
 	//send signal to client to tell that its ready to receive the next signal
-	//kill(info->si_pid, SIGUSR2);
+	kill(info->si_pid, SIGUSR2);
 	if (bits == 8)
 	{
 		ft_printf("%c", character);

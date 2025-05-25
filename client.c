@@ -6,21 +6,25 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:48:00 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/25 15:22:19 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/25 22:25:16 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minitalk.h"
+#include <signal.h>
+#include <unistd.h>
 
-static t_status status = {0};
+static t_status status = READY;
 
-void signal_ack(int signum, siginfo_t *info, void *res)
+void signal_ack(int signum)
 {
-	(void)res;
-	(void)info;
 	if (signum == SIGUSR2)
+		status = READY;
+	else
 	{
 		status = READY;
+		write(1, "HI", 2);
+		write(STDOUT_FILENO, "Message received and acknowledged by server", 43);
 	}
 }
 
@@ -63,12 +67,12 @@ int main(int argc, char *argv[])
 		ft_printf("Error! Usage:./client [PID] [message]");
 		exit(1);
 	}
+	act.sa_handler = &signal_ack;
 	sigemptyset(&act.sa_mask);
-	act.sa_flags = SA_SIGINFO;
-	act.sa_sigaction = &signal_ack;
+	act.sa_flags = 0;
 	sigaction(SIGUSR2, &act, NULL);
+	sigaction(SIGUSR1, &act, NULL);
 	int PID = ft_atoi(argv[1]);
-	char *mssg = ft_strdup(argv[2]);
+	char *mssg = argv[2];
 	send_mssg(PID, mssg);
-	free(mssg);
 }

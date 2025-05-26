@@ -6,7 +6,7 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 22:17:43 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/25 14:54:42 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/27 00:36:57 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef enum s_status
 {
 	READY = 0,
-	BUSY = 1
+	BUSY = 1,
+	END = 2
 }t_status;
 #endif

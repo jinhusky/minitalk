@@ -6,7 +6,7 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 12:16:31 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/27 00:24:53 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/27 12:21:07 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 
 void signal_handler(int signum, siginfo_t *info, void *res)
 {
-	static int character;
+	static unsigned char character;
 	static int bits;
 	
 	(void)res;
 	if (signum == SIGUSR1)
 		character |= (0x01 << bits);
 	bits++;
-	kill(info->si_pid, SIGUSR2);
-	//send signal to client to tell that its ready to receive the next signal
+
 	if (bits == 8)
 	{
 		write(STDOUT_FILENO, &character, 1);
@@ -36,6 +35,8 @@ void signal_handler(int signum, siginfo_t *info, void *res)
 		character = 0;
 		bits = 0;
 	}
+	//send signal to client to tell that its ready to receive the next signal
+	kill(info->si_pid, SIGUSR2);
 }
 
 int main(void)
@@ -46,7 +47,6 @@ int main(void)
 	act.sa_sigaction = signal_handler;
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = SA_SIGINFO;
-    //temporarily add SIGUSR1 to block list so that while SIGUSR2 sigaction is running it wait until SIGUSR2 handler return before receiving SIGUSR1
 	sigaction(SIGUSR2, &act, NULL);
 	sigaction(SIGUSR1, &act, NULL);
 	while(1)

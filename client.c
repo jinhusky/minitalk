@@ -6,7 +6,7 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:48:00 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/27 00:39:28 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/27 12:28:54 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 
 static t_status status = READY;
 
-void signal_ack(int signum)
+void signal_ack(int signum, siginfo_t *info, void *res)
 {
+	(void)res;
 	if (signum == SIGUSR2)
 		status = READY;
 	else
 	{
-		write(1, "HI", 2);
-		write(STDOUT_FILENO, "Message received and acknowledged by server\n", 43);
-		status = END;
+		ft_printf("\033[0;32mMessage received and acknowledged by server\033[0m %i\n", info->si_pid);
+		status = READY;
 	}
 }
 
@@ -91,15 +91,19 @@ int main(int argc, char *argv[])
 		ft_printf("Error! Usage:./client [PID] [message]");
 		exit(1);
 	}
-	act.sa_handler = signal_ack;
+	act.sa_sigaction = signal_ack;
 	sigemptyset(&act.sa_mask);
-	act.sa_flags = 0;
+	act.sa_flags = SA_SIGINFO;
+	sigaddset(&act.sa_mask, SIGUSR1);
+	sigaddset(&act.sa_mask, SIGUSR2);
 	sigaction(SIGUSR2, &act, NULL);
 	sigaction(SIGUSR1, &act, NULL);
+    //temporarily add SIGUSR1 to block list so that while SIGUSR2 sigaction is running it wait until SIGUSR2 handler return before receiving SIGUSR1
 	int PID = ft_atoi(argv[1]);
 	char *mssg = ft_strdup(argv[2]);
 	send_mssg(PID, mssg);
-	while(status != END)
+	while (status == BUSY)
 		usleep(50);
 	free(mssg);
+	return (0);
 }

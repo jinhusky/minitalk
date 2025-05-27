@@ -6,7 +6,7 @@
 /*   By: kationg <kationg@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:48:00 by kationg           #+#    #+#             */
-/*   Updated: 2025/05/27 13:06:00 by kationg          ###   ########.fr       */
+/*   Updated: 2025/05/28 01:18:31 by kationg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,9 @@ void	send_char(int PID, char c)
 		g_status = BUSY;
 		temp = c >> i;
 		if (temp & 0x01)
-		{
-			if (kill(PID, SIGUSR1) == -1)
-				ft_printf("Failed to send SIGUSR1 to %i server", PID);
-		}
+			kill(PID, SIGUSR1);
 		else
-		{
-			if (kill(PID, SIGUSR2) == -1)
-				ft_printf("Failed to send SIGUSR1 to %i server", PID);
-		}
+			kill(PID, SIGUSR2);
 		i++;
 	}
 }
@@ -81,7 +75,6 @@ int	main(int argc, char *argv[])
 {
 	struct sigaction	act;
 	int					pid;
-	char				*mssg;
 
 	if (argc != 3 || !check_pid(argv[1]))
 	{
@@ -96,10 +89,8 @@ int	main(int argc, char *argv[])
 	sigaction(SIGUSR2, &act, NULL);
 	sigaction(SIGUSR1, &act, NULL);
 	pid = ft_atoi(argv[1]);
-	mssg = ft_strdup(argv[2]);
-	send_mssg(pid, mssg);
+	send_mssg(pid, argv[2]);
 	while (g_status == BUSY)
 		usleep(50);
-	free(mssg);
 	return (0);
 }
